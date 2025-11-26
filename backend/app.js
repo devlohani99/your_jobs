@@ -18,6 +18,8 @@ app.use(
       "https://your-jobsfrontend.vercel.app",
       "https://yourjobs-frontend.vercel.app", 
       "https://your-jobs-frontend.vercel.app",
+      "https://yourjobs-your-jobsfrontend.vercel.app",
+      /.*\.vercel\.app$/,
       process.env.FRONTEND_URL
     ],
     methods: ["GET", "POST", "DELETE", "PUT"],
