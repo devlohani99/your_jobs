@@ -10,7 +10,12 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
 const app = express();
+
+// Load environment variables first
 config({ path: "./.env" });
+
+// Connect to database
+dbConnection();
 
 app.use(
   cors({
@@ -65,6 +70,15 @@ app.get('/api/test', (req, res) => {
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/application", applicationRouter);
+
+// Handle unknown API routes
+app.use('/api/*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `API route ${req.originalUrl} not found`
+  });
+});
+
 dbConnection();
 
 app.use(errorMiddleware);
