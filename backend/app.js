@@ -14,16 +14,30 @@ config({ path: "./.env" });
 
 app.use(
   cors({
-    origin: [
-      "https://your-jobsfrontend.vercel.app",
-      "https://yourjobs-frontend.vercel.app", 
-      "https://your-jobs-frontend.vercel.app",
-      "https://yourjobs-your-jobsfrontend.vercel.app",
-      /.*\.vercel\.app$/,
-      process.env.FRONTEND_URL
-    ],
-    methods: ["GET", "POST", "DELETE", "PUT"],
+    origin: function(origin, callback) {
+      console.log('CORS Origin:', origin);
+      const allowedOrigins = [
+        "https://your-jobsfrontend.vercel.app",
+        "https://yourjobs-frontend.vercel.app", 
+        "https://your-jobs-frontend.vercel.app",
+        "https://yourjobs-your-jobsfrontend.vercel.app"
+      ];
+      
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      
+      // Check if origin matches allowed origins or vercel.app pattern
+      if (allowedOrigins.includes(origin) || /.*\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      } else {
+        console.log('CORS blocked origin:', origin);
+        return callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
+    optionsSuccessStatus: 200
   })
 );
 
@@ -37,6 +51,17 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+
+// Root route for health check
+app.get('/', (req, res) => {
+  res.json({ message: 'YourJobs Backend API is running!', timestamp: new Date() });
+});
+
+// Test route
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Backend is working!', origin: req.headers.origin });
+});
+
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/application", applicationRouter);
