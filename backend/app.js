@@ -10,11 +10,16 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
 const app = express();
-config({ path: "./config/config.env" });
+config({ path: "./.env" });
 
 app.use(
   cors({
-    origin: ["https://yourjobs-frontend-your-actual-url.vercel.app", "https://yourjobs-frontend.vercel.app", process.env.FRONTEND_URL],
+    origin: [
+      "https://your-jobsfrontend.vercel.app",
+      "https://yourjobs-frontend.vercel.app", 
+      "https://your-jobs-frontend.vercel.app",
+      process.env.FRONTEND_URL
+    ],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
