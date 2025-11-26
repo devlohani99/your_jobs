@@ -4,7 +4,7 @@ const config = {
     API_BASE_URL: 'http://localhost:4000',
   },
   production: {
-    API_BASE_URL: 'https://yourjobs-backend.vercel.app',
+    API_BASE_URL: 'https://yourjobs-your-jobsbackend-9s7vcp51u-devlohani99s-projects.vercel.app.vercel.app',
   }
 };
 
