@@ -8,12 +8,14 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, () => {
-  console.log(`Server running at port ${PORT}`);
-  console.log('Environment:', process.env.NODE_ENV);
-});
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => {
+    console.log(`Server running at port ${PORT}`);
+    console.log('Environment:', process.env.NODE_ENV);
+  });
+}
 
 // Export for Vercel serverless
 export default app;

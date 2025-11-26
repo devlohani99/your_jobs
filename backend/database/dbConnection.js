@@ -1,17 +1,21 @@
-import mongoose from "mongoose"; //just mongoose import!
-import dotenv from "dotenv"
-dotenv.config()
+import mongoose from "mongoose";
 
-//Database connection here!
- const dbConnection  = ()=>{
-    mongoose.connect(process.env.DB_URL,{
-       dbName: "Job_Portal"
+// Database connection with better error handling
+const dbConnection = () => {
+  const DB_URL = process.env.DB_URL;
+  
+  if (!DB_URL) {
+    console.error('DB_URL environment variable is not set');
+    return;
+  }
 
-    }).then(()=>{ //agar connect ho jaye toh!
-       console.log("MongoDB Connected Sucessfully !")
-    }).catch((error)=>{
-        console.log(`Failed to connect ${error}`)
-    })
-    
-}
+  mongoose.connect(DB_URL, {
+    dbName: "Job_Portal"
+  }).then(() => {
+    console.log("MongoDB Connected Successfully!");
+  }).catch((error) => {
+    console.log(`Failed to connect to MongoDB: ${error.message}`);
+  });
+};
+
 export default dbConnection;
