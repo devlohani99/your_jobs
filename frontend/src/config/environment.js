@@ -4,7 +4,7 @@ const config = {
     API_BASE_URL: 'http://localhost:4000',
   },
   production: {
-    API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'https://your-jobs-backend.vercel.app',
+    API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'https://your-jobsbackend.vercel.app',
   }
 };
 

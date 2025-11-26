@@ -1,15 +1,10 @@
 {
   "version": 2,
   "name": "your-jobs-backend",
-  "functions": {
-    "api/index.js": {
-      "runtime": "@vercel/node@18.x"
-    }
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "api/index.js"
+      "source": "/(.*)",
+      "destination": "/api"
     }
   ]
 }
