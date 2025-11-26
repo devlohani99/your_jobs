@@ -15,6 +15,19 @@ const Login = () => {
 
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
 
+  // Quick fill functions for test users
+  const fillJobSeeker = () => {
+    setEmail("j@gmail.com");
+    setPassword("12345678");
+    setRole("Job Seeker");
+  };
+
+  const fillEmployer = () => {
+    setEmail("e@gmail.com");
+    setPassword("12345678");
+    setRole("Employer");
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -72,6 +85,54 @@ const Login = () => {
               YourJobs
             </h1>
             <h3>Login to your account</h3>
+            <div style={{
+              background: 'linear-gradient(135deg, #EEF2FF, #F3F4F6)',
+              padding: '12px',
+              borderRadius: '8px',
+              marginTop: '12px',
+              fontSize: '14px',
+              border: '1px solid #E5E7EB'
+            }}>
+              <p style={{ margin: '0 0 8px 0', fontWeight: '600', color: '#374151' }}>Test Users:</p>
+              <p style={{ margin: '4px 0', color: '#6B7280' }}>
+                <strong>Job Seeker:</strong> j@gmail.com / 12345678
+              </p>
+              <p style={{ margin: '4px 0', color: '#6B7280' }}>
+                <strong>Employer:</strong> e@gmail.com / 12345678
+              </p>
+              <div style={{ marginTop: '8px', display: 'flex', gap: '8px' }}>
+                <button 
+                  type="button"
+                  onClick={fillJobSeeker}
+                  style={{
+                    padding: '4px 8px',
+                    fontSize: '12px',
+                    background: '#3B82F6',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Use Job Seeker
+                </button>
+                <button 
+                  type="button"
+                  onClick={fillEmployer}
+                  style={{
+                    padding: '4px 8px',
+                    fontSize: '12px',
+                    background: '#10B981',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Use Employer
+                </button>
+              </div>
+            </div>
           </div>
           <form>
             <div className="inputTag">
